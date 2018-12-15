@@ -34,7 +34,7 @@ public class DoubleEndedListTest {
         list.add(3, 400);
 
         list.removeFirst();
-        list.removeLast();
+        //list.removeLast();
         //맨 처음과 마지막 요소를 삭제했으니 200,300,400이 출력될 것
         System.out.println(list);
 

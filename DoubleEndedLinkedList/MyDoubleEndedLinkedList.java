@@ -31,8 +31,8 @@ public class MyDoubleEndedLinkedList {
     private Header header;
     private int size;
 
-    private org.w3c.dom.Node nextNode;
-    private org.w3c.dom.Node lastNode;
+    private Node nextNode;
+    private Node lastNode;
 
     public MyDoubleEndedLinkedList(){
         header = new Header();
@@ -44,8 +44,8 @@ public class MyDoubleEndedLinkedList {
      * 마지막 노드를 참조하는 lastNode로 구성된다.
      */
     public class Header{
-        private org.w3c.dom.Node nextNode;
-        private org.w3c.dom.Node lastNode;
+        private MyDoubleEndedLinkedList.Node nextNode;
+        private MyDoubleEndedLinkedList.Node lastNode;
 
         Header(){
             nextNode = null;
@@ -62,7 +62,7 @@ public class MyDoubleEndedLinkedList {
     private class Node{
 
         private Object data;
-        private org.w3c.dom.Node nextNode;
+        private Node nextNode;
 
         Node(Object data){
             this.data = data;
@@ -90,11 +90,11 @@ public class MyDoubleEndedLinkedList {
     public void addFirst(Object data){
         Node newNode = new Node(data);
         newNode.nextNode = header.nextNode;
-        header.nextNode = (org.w3c.dom.Node) newNode;
+        header.nextNode = newNode;
         size++;
 
         if(newNode.nextNode == null){
-            header.lastNode = (org.w3c.dom.Node) newNode;
+            header.lastNode = newNode;
         }
     }
 
@@ -113,8 +113,8 @@ public class MyDoubleEndedLinkedList {
             addFirst(data);
         }else{
             Node newNode = new Node(data);
-            last.nextNode = (org.w3c.dom.Node) newNode;
-            header.lastNode = (org.w3c.dom.Node) newNode;
+            last.nextNode = newNode;
+            header.lastNode = newNode;
             size++;
         }
     }
@@ -134,7 +134,7 @@ public class MyDoubleEndedLinkedList {
             Node previous = getNode(index-1);
             Node next = (Node) previous.nextNode;
             Node newNode = new Node(data);
-            previous.nextNode = (org.w3c.dom.Node) newNode;
+            previous.nextNode = newNode;
         }
     }
 
@@ -247,11 +247,11 @@ public class MyDoubleEndedLinkedList {
         Node previous = getNode(index-1);
         Node removeNode = (Node) previous.nextNode;
         Node next = (Node) removeNode.nextNode;
-        previous.nextNode = (org.w3c.dom.Node) next;
+        previous.nextNode = next;
         size--;
 
         if(previous.nextNode == null){
-            header.lastNode = (org.w3c.dom.Node) previous;
+            header.lastNode = previous;
         }
 
         return removeNode.data;
